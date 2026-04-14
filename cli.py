@@ -4,23 +4,27 @@ from __future__ import annotations
 
 import cyclopts
 
-from src.hello.greeter import Greeter
+from src.crawler.reddit_crawl import RedditCrawl
 
 app = cyclopts.App(
     name="py-cli",
-    help="Simple Hello World CLI.",
+    help="Reddit crawler CLI.",
 )
 
 
 @app.default
-def hello(name: str = "World") -> None:
-    """Greet someone with a hello message.
+def crawl(seeds: list[str] = ["https://www.reddit.com/r/programming/"]) -> None:
+    """Crawl Reddit URLs and print scraped links.
 
     Args:
-        name: Name to greet. Defaults to "World".
+        seeds: Reddit URLs to crawl.
     """
-    greeter = Greeter(name)
-    print(greeter.greet())
+    crawler = RedditCrawl(seeds)
+    results = crawler.crawl()
+    for i, link in enumerate(results, 1):
+        print(f"[{i}] {link.linkType.value} | {link.url}")
+        print(f"    {link.data[:80]}{'...' if len(link.data) > 80 else ''}")
+        print()
 
 
 def main() -> None:
