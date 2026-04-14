@@ -1,0 +1,23 @@
+[project]
+name = "py-cli"
+version = "0.1.0"
+description = "Simple Hello World CLI"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "cyclopts>=3.0",
+]
+
+[project.scripts]
+py-cli = "cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hello", "cli.py", "app.py"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
