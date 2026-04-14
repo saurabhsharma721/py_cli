@@ -5,6 +5,7 @@ description = "Simple Hello World CLI"
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "cyclopts>=3.0",
+    "requests>=2.31",
 ]
 
 [project.scripts]
@@ -16,7 +17,7 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/hello", "cli.py", "app.py"]
+packages = ["src/hello", "src/entity", "src/crawler", "cli.py", "app.py"]
 
 [build-system]
 requires = ["hatchling"]
